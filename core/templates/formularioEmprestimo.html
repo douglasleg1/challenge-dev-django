@@ -1,0 +1,27 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações de Empréstimos - DIGITAL SYSTEM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Solicitações de Empréstimos - DIGITAL SYSTEM</h1>
+        <form id="emprestimoForm">
+            {% csrf_token %}
+            <input type="text" name="nome" id="nomeCliente" class="form-control mt-2" placeholder="Nome Completo">
+            <input type="text" name="cpf" id="cpfCliente" class="form-control mt-2" placeholder="CPF">
+            <input type="text" name="endereco" id="enderecoCliente" class="form-control mt-2" placeholder="Endereço">
+            <input type="text" name="valorEmprestimo" id="valorEmprestimoCliente" class="form-control mt-2" placeholder="Valor do Empréstimo Pretendido">
+            <button type="submit" class="btn btn-primary mt-3" id="submitBtn">Solicitar Empréstimo</button>
+        </form>
+        
+        <span hidden>Retorno da API: <h3 id="retornoAPI"></h3></span>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/emprestimos/emprestimos.js'%}"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+services:
+
+  celery_broker:
+    container_name: emprestimosproject_celery_broker
+    image: rabbitmq:3.8.2
+    restart: always
+    ports:
+      - 5672:5672
+
+  celery_worker:
+    container_name: celery_worker
+    build: .
+    restart: always
+    command: bash -c 'celery -A emprestimosproject worker -l INFO'
+    depends_on:
+      - celery_broker
+
+  web:
+    build: .
+    volumes:
+      - .:/core
+  web_migrate:
+    extends:
+      service: web
+    command: python3 manage.py migrate
+  web_run:
+    extends:
+      service: web
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
